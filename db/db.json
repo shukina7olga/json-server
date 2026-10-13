@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "name": "Jacob",
+      "email": "thornton@gmail.com",
+      "children": true,
+      "permissions": false,
+      "id": "1"
+    },
+    {
+      "name": "Igor",
+      "email": "qwe@gmail.com",
+      "children": true,
+      "permissions": true,
+      "id": "2"
+    },
+    {
+      "name": "Kito179898",
+      "email": "olga.olga17175@gmail.com",
+      "children": false,
+      "permissions": false,
+      "id": "4ISzpaADwPA"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
