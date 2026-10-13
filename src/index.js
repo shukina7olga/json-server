@@ -8,11 +8,18 @@ import { filterUsers } from "./modules/filterUsers";
 import { sortUsers } from "./modules/sortUsers";
 import { searchUsers } from "./modules/searchUsers";
 
-window.userService = new UserService
+window.userService = new UserService()
 
-userService.getUsers().then(data => {
-    render(data)
-})
+const errorBlock = document.getElementById('error-block')
+
+userService.getUsers()
+    .then(data => {
+        render(data)
+    })
+    .catch(error => {
+        console.error(error)
+        errorBlock.textContent = 'Произошла ошибка, данных нет!'
+    })
 
 addUsers()
 removeUsers()

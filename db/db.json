@@ -1,13 +1,6 @@
 {
   "users": [
     {
-      "name": "Jacob",
-      "email": "thornton@gmail.com",
-      "children": true,
-      "permissions": false,
-      "id": "1"
-    },
-    {
       "name": "Igor",
       "email": "qwe@gmail.com",
       "children": true,
@@ -20,6 +13,13 @@
       "children": false,
       "permissions": false,
       "id": "4ISzpaADwPA"
+    },
+    {
+      "name": "Vlad",
+      "email": "1234qwe@gmail.com",
+      "children": true,
+      "permissions": false,
+      "id": "kavoVyRkU40"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

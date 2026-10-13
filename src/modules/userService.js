@@ -1,57 +1,66 @@
 export class UserService {
+    _fetchData(url) {
+        return fetch(url).then(response => {
+            if (!response.ok) {
+                throw new Error('Ошибка запроса')
+            }
+            return response.json()
+        })
+    }
+
+    _sendData(url, method = 'POST', data = {}) {
+        const options = {
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+
+        if (method !== 'GET' && method !== 'DELETE') {
+            options.body = JSON.stringify(data)
+        }
+
+        return fetch(url, options).then(response => {
+            if (!response.ok) {
+                throw new Error('Ошибка запроса')
+            }
+            return response.json()
+        })
+    }
+
     getUsers() {
-        return fetch('http://localhost:7571/users').then(res => res.json())
+        return this._fetchData('http://localhost:7571/users')
     }
 
     addUser(user) {
-        return fetch('http://localhost:7571/users',{
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user)
-        }).then(response => response.json())
+        return this._sendData('http://localhost:7571/users', 'POST', user)
     }
 
     removeUser(id) {
-        return fetch(`http://localhost:7571/users/${id}`, {
-            method: 'DELETE'
-        }).then(response => response.json())
+        return this._sendData(`http://localhost:7571/users/${id}`, 'DELETE')
     }
 
     changeUser(id, data) {
-        return fetch(`http://localhost:7571/users/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then(response => response.json())
+        return this._sendData(`http://localhost:7571/users/${id}`, 'PATCH', data)
     }
 
     getUser(id) {
-        return fetch(`http://localhost:7571/users/${id}`).then(response => response.json())
+        return this._fetchData(`http://localhost:7571/users/${id}`)
     }
 
     editUser(id, user) {
-        return fetch(`http://localhost:7571/users/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify(user),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then(response => response.json())
+        return this._sendData(`http://localhost:7571/users/${id}`, 'PUT', user)
     }
 
     filterUsers(filterOption) {
-        return fetch(`http://localhost:7571/users?${filterOption}=true`).then(response => response.json())
+        return this._fetchData(`http://localhost:7571/users?${filterOption}=true`)
     }
 
     getSortUsers(sortOption) {
-        return fetch(`http://localhost:7571/users?_sort=${sortOption.name}&_order=${sortOption.value}`).then(response => response.json())
+        return this._fetchData(`http://localhost:7571/users?_sort=${sortOption.name}&_order=${sortOption.value}`)
     }
 
     getSearchUsers(str) {
-        return fetch(`http://localhost:7571/users?name_like=${str}`).then(response => response.json())
+        return this._fetchData(`http://localhost:7571/users?name_like=${str}`)
     }
 }
